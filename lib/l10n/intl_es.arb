@@ -1,0 +1,10 @@
+{
+  "appTitle": "Farm_Buddy",
+  "signIn": "Iniciar sesión",
+  "username": "Nombre de usuario",
+  "password": "Contraseña",
+  "searchCrops": "Buscar cultivos...",
+  "addCrop": "Agregar cultivo",
+  "plantingDate": "Fecha de siembra",
+  "estimatedHarvestDate": "Fecha de cosecha estimada"
+}

@@ -1,0 +1,10 @@
+{
+  "appTitle": "Farm Buddy",
+  "signIn": "Sign In",
+  "username": "Username",
+  "password": "Password",
+  "searchCrops": "Search crops...",
+  "addCrop": "Add Crop",
+  "plantingDate": "Planting Date",
+  "estimatedHarvestDate": "Estimated Harvest Date"
+}

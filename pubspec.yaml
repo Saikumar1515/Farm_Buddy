@@ -1,0 +1,44 @@
+name: farm_buddy
+description: A new Flutter project for managing planting and harvest tracking for small-scale farmers.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.0.15
+  provider: ^6.0.4
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.3.3
+  intl_utils: ^2.7.1
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - lib/l10n/
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+
+# Add localization configuration under this section
+flutter_intl:
+  arb-dir: lib/l10n
+  template-arb-file: intl_en.arb
+  output-localization-file: app_localizations.dart
+  output-class: AppLocalizations
+  output-dir: lib/generated
