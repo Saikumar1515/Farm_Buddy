@@ -1,39 +1,37 @@
 import 'package:flutter/material.dart';
 import '../models/crop.dart';
-import '../services/storage_service.dart';
-import 'package:flutter/foundation.dart';
 
 class CropProvider with ChangeNotifier {
   List<Crop> _crops = [];
 
   List<Crop> get crops => _crops;
-  List<Crop> get harvestedCrops => _crops.where((crop) => crop.actualHarvestDate != null).toList();
 
   void addCrop(Crop crop) {
     _crops.add(crop);
-    StorageService.saveCrop(crop); // Save to local storage
     notifyListeners();
   }
 
-  void markAsHarvested(Crop crop, DateTime actualHarvestDate) {
-    crop.actualHarvestDate = actualHarvestDate;
-    StorageService.saveCrop(crop); // Update in local storage
-    notifyListeners();
+  void updateCrop(Crop updatedCrop) {
+    final index = _crops.indexWhere((crop) => crop.id == updatedCrop.id);
+    if (index >= 0) {
+      _crops[index] = updatedCrop;
+      notifyListeners();
+    }
   }
 
-  void sortByPlantingDate() {
-    _crops.sort((a, b) => a.plantingDate.compareTo(b.plantingDate));
-    notifyListeners();
-  }
-
-  void sortByHarvestDate() {
-    _crops.sort((a, b) => a.estimatedHarvestDate.compareTo(b.estimatedHarvestDate));
+  void deleteCrop(String id) {
+    _crops.removeWhere((crop) => crop.id == id);
     notifyListeners();
   }
 
   List<Crop> searchCrops(String query) {
-    return _crops.where((crop) => crop.name.toLowerCase().contains(query.toLowerCase())).toList();
+    return _crops
+        .where((crop) => crop.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
   }
 
-// Additional methods to manage crops can go here
+  // Add the harvestedCrops getter
+  List<Crop> get harvestedCrops {
+    return _crops.where((crop) => crop.actualHarvestDate != null).toList();
+  }
 }

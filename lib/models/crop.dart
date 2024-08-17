@@ -1,22 +1,27 @@
+
+
 class Crop {
-  String name;
-  DateTime plantingDate;
-  DateTime estimatedHarvestDate;
-  DateTime? actualHarvestDate;
+  final String id; // Unique identifier for the crop
+  final String name;
+  final DateTime? plantingDate;
+  final DateTime? estimatedHarvestDate;
+  final DateTime? actualHarvestDate;
 
   Crop({
+    required this.id,
     required this.name,
-    required this.plantingDate,
-    required this.estimatedHarvestDate,
+    this.plantingDate,
+    this.estimatedHarvestDate,
     this.actualHarvestDate,
   });
 
-  // Convert Crop object to a Map
+  // Convert a Crop object into a Map
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
-      'plantingDate': plantingDate.toIso8601String(),
-      'estimatedHarvestDate': estimatedHarvestDate.toIso8601String(),
+      'plantingDate': plantingDate?.toIso8601String(),
+      'estimatedHarvestDate': estimatedHarvestDate?.toIso8601String(),
       'actualHarvestDate': actualHarvestDate?.toIso8601String(),
     };
   }
@@ -24,12 +29,34 @@ class Crop {
   // Create a Crop object from a Map
   factory Crop.fromMap(Map<String, dynamic> map) {
     return Crop(
-      name: map['name'],
-      plantingDate: DateTime.parse(map['plantingDate']),
-      estimatedHarvestDate: DateTime.parse(map['estimatedHarvestDate']),
-      actualHarvestDate: map['actualHarvestDate'] != null
-          ? DateTime.parse(map['actualHarvestDate'])
+      id: map['id'] as String,
+      name: map['name'] as String,
+      plantingDate: map['plantingDate'] != null
+          ? DateTime.parse(map['plantingDate'] as String)
           : null,
+      estimatedHarvestDate: map['estimatedHarvestDate'] != null
+          ? DateTime.parse(map['estimatedHarvestDate'] as String)
+          : null,
+      actualHarvestDate: map['actualHarvestDate'] != null
+          ? DateTime.parse(map['actualHarvestDate'] as String)
+          : null,
+    );
+  }
+
+  // Method to create a copy of the current instance with some fields modified
+  Crop copyWith({
+    String? id,
+    String? name,
+    DateTime? plantingDate,
+    DateTime? estimatedHarvestDate,
+    DateTime? actualHarvestDate,
+  }) {
+    return Crop(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      plantingDate: plantingDate ?? this.plantingDate,
+      estimatedHarvestDate: estimatedHarvestDate ?? this.estimatedHarvestDate,
+      actualHarvestDate: actualHarvestDate ?? this.actualHarvestDate,
     );
   }
 }

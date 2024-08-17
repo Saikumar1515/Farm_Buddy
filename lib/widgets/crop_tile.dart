@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/crop.dart';
-import '../providers/crop_provider.dart';
-import 'package:provider/provider.dart';
 
 class CropTile extends StatelessWidget {
   final Crop crop;
@@ -12,24 +10,11 @@ class CropTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(crop.name),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Planting Date: ${crop.plantingDate.toLocal()}"),
-          Text("Estimated Harvest Date: ${crop.estimatedHarvestDate.toLocal()}"),
-          if (crop.actualHarvestDate != null)
-            Text("Actual Harvest Date: ${crop.actualHarvestDate!.toLocal()}"),
-        ],
+      subtitle: Text(
+        'Planting Date: ${crop.plantingDate != null ? crop.plantingDate!.toLocal().toString().split(' ')[0] : 'N/A'}\n'
+            'Estimated Harvest Date: ${crop.estimatedHarvestDate != null ? crop.estimatedHarvestDate!.toLocal().toString().split(' ')[0] : 'N/A'}',
       ),
-      trailing: crop.actualHarvestDate == null
-          ? IconButton(
-        icon: Icon(Icons.check),
-        onPressed: () {
-          Provider.of<CropProvider>(context, listen: false)
-              .markAsHarvested(crop, DateTime.now());
-        },
-      )
-          : null,
+      // Optionally, add an onTap to navigate to the EditCropPage
     );
   }
 }

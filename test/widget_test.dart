@@ -65,7 +65,7 @@ void main() {
     final crop = Crop(
       name: 'Carrot',
       plantingDate: DateTime.now(),
-      estimatedHarvestDate: DateTime.now().add(Duration(days: 60)),
+      estimatedHarvestDate: DateTime.now().add(Duration(days: 60)), id: '',
     );
 
     await tester.pumpWidget(

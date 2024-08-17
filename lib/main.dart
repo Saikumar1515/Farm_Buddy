@@ -8,7 +8,7 @@ import 'providers/locale_provider.dart';
 import 'pages/home_page.dart';
 import 'pages/sign_in_page.dart';
 import 'utils/theme.dart';
-import 'generated/app_localizations.dart';
+import 'generated/app_localizations.dart';  // Adjust this import path as needed
 
 Future<void> clearStoredData() async {
   final prefs = await SharedPreferences.getInstance();
@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
     return isSignedIn;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
               body: Center(child: CircularProgressIndicator()),
             ),
             localizationsDelegates: [
+              AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
